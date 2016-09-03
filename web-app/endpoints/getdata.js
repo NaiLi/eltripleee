@@ -30,7 +30,7 @@ const patients = [
 module.exports = function (req, res) {
   let end = (new Date()).getTime();
   let start = end - 1000 * 60;
-  let interval = 60;
+  let interval = 1000;
 
   let data = [];
   patients.forEach((v, patientId) => {
