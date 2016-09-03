@@ -12,15 +12,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-let postPulse = require('./endpoints/postPulse');
+let postPulse = require('./endpoints/postpulse');
 //let postMovement = require('./endpoints/postMovement');
-//let postLocation = require('./endpoints/postLocation');
+let postLocation = require('./endpoints/postlocation');
 let getData = require('./endpoints/getdata');
 
 
 app.use(express.static('public'));
 app.get('/data', getData);
 app.post('/pulse', postPulse);
+app.post('/location', postLocation);
 
 // Create web socket server on top of a regular http server
 let wss = new WSServer({

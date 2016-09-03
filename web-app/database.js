@@ -15,6 +15,7 @@ class Database {
     let output = JSON.stringify(db);
     fs.writeFileSync(filename, output);
   }
+
   insertPulseData(id, data) {
     if (db[id] === undefined) {
       db[id] = {};
@@ -25,6 +26,19 @@ class Database {
     }
     patientData.pulse.push(data);
   }
+
+  insertLocationData(id, data) {
+    console.log('insert location');
+    if (db[id] === undefined) {
+      db[id] = {};
+    }
+    let patientData = db[id];
+    if (patientData.location === undefined) {
+      patientData.location = [];
+    }
+    patientData.location.push(data); 
+  }
+
   getLatestData() {
     // Return mock data.
     // TODO: return real data.
