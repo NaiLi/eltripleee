@@ -1,8 +1,9 @@
 var eltripleee = angular.module('eltripleee', [])
   .controller('mainController', ['$scope', function($scope) {
 
-  $scope.title = "Avdelning XXX";
-  
+  $scope.title = "Postoperative department 1";
+  $scope.subtitle = "University Hospital of Umeå";
+
   $scope.roomData = {
     rooms: [
     {
@@ -15,9 +16,9 @@ var eltripleee = angular.module('eltripleee', [])
         oxygenSaturation: 500
       },
       movement: 5,
-      emergencyStatus: 10   
+      emergencyStatus: 10
     },
-    { 
+    {
       id: 1,
       roomNo: 2,
       age: 75,
