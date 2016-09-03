@@ -38,16 +38,19 @@ class Database {
     patientData.location.push(data); 
   }
 
-  getLatestData() {
-    // Return mock data.
-    // TODO: return real data.
-    return {
-      id: 0,
-      pulse: 70,
-      time: (new Date()).getTime(),
-      acceleration: 1.01,
-      location: [1, 2, 3]
+  getLocationData(id) {
+    if (db[id] && db[id].location) {
+      return db[id].location;
+    } else {
+      return [];
     }
+  }
+
+  getPulseData(id) {
+    if (db[id] && db[id].pulse)
+      return db[id].pulse;
+    else 
+      return [];
   }
 }
 

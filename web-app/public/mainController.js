@@ -48,6 +48,19 @@ var eltripleee = angular.module('eltripleee', [])
     }]
   };
 
+  let socket = new WebSocket('ws://localhost:3000/');
+
+  socket.onopen = function() {
+    console.log('Socket open.');
+  };
+
+  socket.onmessage = function(message) {
+    //console.log('Socket server message', message);
+    let latestData = JSON.parse(message.data);
+    //console.log(latestData);
+  };
+
+
 /*
   var source   = $("#roomlist").html();
   var template = Handlebars.compile(source);
