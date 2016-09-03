@@ -12,11 +12,18 @@ if (fs.existsSync(filename)) {
 
 class Database {
   save() {
-    let output = JSON.stringify(data);
+    let output = JSON.stringify(db);
     fs.writeFileSync(output);
   }
-  insertPulseData(data) {
-
+  insertPulseData(id, data) {
+    if (db.id === undefined) {
+      db.id = {};
+    }
+    let patientData = db[id];
+    if (patientData.pulse === undefined) {
+      patientData.pulse = [];
+    }
+    patientData.push(data);
   }
   getLatestData() {
     // Return mock data.
