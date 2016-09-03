@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 
 
 let postPulse = require('./endpoints/postpulse');
-//let postMovement = require('./endpoints/postMovement');
+let postMovement = require('./endpoints/postmovement');
 let postLocation = require('./endpoints/postlocation');
 let getData = require('./endpoints/getdata');
 

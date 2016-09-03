@@ -68,6 +68,4 @@ Vi sitter i samma fil
 */
 
 
-
-
 module.exports = new Pulse();

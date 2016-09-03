@@ -23,12 +23,21 @@ function post(endpoint, data) {
   req.end();
 }
 
+let newBeats = [];
+(function heartbeat() {
+  newBeats.push((new Date()).getTime());
+  let theta = ((new Date()).getTime() % (1000 * 60)) / 1000 / 60 * 2 * Math.PI;
+  let pulse = 75 + 10 * Math.cos(theta);
+  setTimeout(heartbeat, 1000 * 60 / pulse);
+})();
+
 function postPulse() {
   let postData = {
     startTime: (new Date()).getTime() - 1000,
     endTime: (new Date()).getTime(),
-    beats: [(new Date()).getTime() - 800, (new Date()).getTime() - 300]
+    beats: newBeats
   };
+  newBeats = [];
   post('pulse', postData);
 }
 
@@ -39,6 +48,18 @@ function postLocation() {
   };
   post('location', postData);
 }
+
+let currentAcceleration = 0;
+function postMovement() {
+  let postData = {
+    time: (new Date()).getTime(),
+    acceleration: currentAcceleration += (Math.random() * 0.01)
+  };
+  post('location', postData);
+}
+
+
+
 
 
 (function loop() {
