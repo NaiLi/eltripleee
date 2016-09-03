@@ -1,7 +1,7 @@
 import heartAccPacket as ham
 import time
 
-endpoint = "http://10.0.0.220:3000/pulse"
+endpoint = "http://localhost:3000/pulse"
 beats = 10
 
 packet = ham.HeartAccPacket(endpoint)
