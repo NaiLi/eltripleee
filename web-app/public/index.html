@@ -13,93 +13,109 @@
   <link rel="stylesheet" type="text/css" href="style/style.css">
   <script src="https://use.fontawesome.com/4d00b53227.js"></script>
 </head>
-<body>
+<body ng-app="eltripleee">
 
-<script src="roomlist/roomlist.js" id="roomlist" type="text/x-handlebars-template" >
-	<div id="roomlist-panel">
-		<h1>Rum</h1>
+<div ng-controller="mainController">
 
-			<div class="row header-row">
+  {{title}}
+  <div class="container">
+    <div id="roomlist-panel">
+        <div class="row header-row">
 
-				<div class="col-xs-2">
-					<h2>Room</h2>
-				</div>
-				<div class="col-xs-2">
-					<p>Age</p>
-				</div>
-				<div class="col-xs-2">
-					<p>Gender</p>
-				</div>
-				<div class="col-xs-2">
-					<p>Pulse</p>
-				</div>
-				<div class="col-xs-2">
-					<p>Oxygen saturation</p>
-				</div>
-				<div class="col-xs-2">
-					<p>Movement</p>
-				</div>
-			</div>
+          <div class="col-xs-2">
+            <h2>Room</h2>
+          </div>
+          <div class="col-xs-2">
+            <p>Age</p>
+          </div>
+          <div class="col-xs-2">
+            <p>Gender</p>
+          </div>
+          <div class="col-xs-2">
+            <p>Pulse</p>
+          </div>
+          <div class="col-xs-2">
+            <p>Oxygen saturation</p>
+          </div>
+          <div class="col-xs-2">
+            <p>Movement</p>
+          </div>
+        </div>
+
+      <div id="lista">
+
+        <div= ng-repeat="room in roomData.rooms" ng-click="onRoomClick(room.id)">
+          <!--<div class="row room-row" onClick="onRoomClick({{id}})">-->
+          <div class="row">
+            <div class="col-xs-2">
+              <h2>Room {{room.roomNo}}</h2>
+            </div>
+            <div class="col-xs-2">
+              <p>{{room.emergencyStatus}}</p>
+            </div>
+            <div class="col-xs-2">
+              <p>{{room.medData.heartRate}}</p>
+            </div>
+            <div class="col-xs-2">
+              <p>{{room.medData.heartRate}}</p>
+            </div>
+            <div class="col-xs-2">
+              <p>{{room.medData.heartRate}}</p>
+            </div>
+
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <!--<script id="roominformation" type="text/x-handlebars-template">-->
+  <!--
+    <div class="modal fade" id="roominformationModal" tabindex="-1" role="dialog" aria-labelledby="roominformationLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" onClick="closeModal()" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Room {{roomNo}}</h4>
+          </div>
+          <div class="modal-body">
+            Age: {{age}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>-->
+  <!--</script>-->
 
 
-		<div id="lista">
+  <!-- ************************* FEED LIST ***************************-->
+    <div id="feedlist-panel">
 
-			{{#rooms}}
+      <div id="lista">
 
-			<div class="row room-row">
+        <div= ng-repeat="feed in feedData.feed">
 
-				<div class="col-xs-2">
-					<h2>Room {{roomNo}}</h2>
-				</div>
-				<div class="col-xs-2">
-					<p>{{emergencyStatus}}</p>
-				</div>
-				<div class="col-xs-2">
-					<p>{{medData.heartRate}}</p>
-				</div>
-				<div class="col-xs-2">
-					<p>{{medData.heartRate}}</p>
-				</div>
-				<div class="col-xs-2">
-					<p>{{medData.heartRate}}</p>
-				</div>
+          <div class="row room-row emergency-{{feed.emergencyStatus}}">
 
-			</div>
+            <h2>Room {{feed.roomNo}}</h2>
+            <p>{{feed.message}}<p>
 
-			{{/rooms}}
+          </div>
+        </div>
 
-		</div>
-	</div>
-</script>
-
-
-<!-- ************************* FEED LIST ***************************-->
-<script id="feedlist" type="text/x-handlebars-template" >
-	<div id="feedlist-panel">
-
-		<div id="lista">
-
-			{{#feed}}
-
-			<div class="row room-row emergency-{{emergencyStatus}}">
-
-				<h2>Room {{roomNo}}</h2>
-				<p>{{message}}<p>
-
-			</div>
-
-			{{/feed}}
-
-		</div>
-	</div>
-</script>
+      </div>
+</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 <script type="text/javascript" src="script/handlebars-1.0.rc.1.min.js" />
 <script src="data/rooms.json"></script>
 <script src="script.js"></script>
+<script src="mainController.js"></script>
 
 </body>
 </html>

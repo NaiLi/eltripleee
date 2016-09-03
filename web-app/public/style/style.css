@@ -6,7 +6,9 @@
   --french-blue: #4874ac;
 }
 
-/* Sample text styles */
+body {
+	padding: 10px;
+}
 
 header {
   font-family: Roboto;
