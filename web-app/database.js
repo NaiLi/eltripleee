@@ -28,7 +28,6 @@ class Database {
   }
 
   insertLocationData(id, data) {
-    console.log('insert location');
     if (db[id] === undefined) {
       db[id] = {};
     }
