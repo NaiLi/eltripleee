@@ -24,7 +24,7 @@ class Database {
       id: 0,
       pulse: 70,
       time: (new Date()).getTime(),
-      accelleration: 1.01,
+      acceleration: 1.01,
       location: [1, 2, 3]
     }
   }

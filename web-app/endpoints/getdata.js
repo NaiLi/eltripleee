@@ -5,7 +5,7 @@ module.exports = function (req, res) {
     0: {
       0: { // time.
         pulse: 70,
-        accelleration: 1.01,
+        acceleration: 1.01,
         location: [1, 2, 3]
       }
     }
