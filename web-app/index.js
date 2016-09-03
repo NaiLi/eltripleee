@@ -31,11 +31,14 @@ let wss = new WSServer({
 server.on('request', app);
 
 function streamDataToWebSocket(ws) {
+
   function stream() {
-    let data = database.getLatestData();
-    let json = JSON.stringify(data);
-    ws.send(json);
-    setTimeout(stream, 1000);
+    if (ws.readyState === ws.OPEN) {
+      let data = database.getLatestData();
+      let json = JSON.stringify(data);
+      ws.send(json);
+      setTimeout(stream, 1000);
+    }
   };
   stream();
 }
@@ -48,3 +51,13 @@ wss.on('connection', function connection(ws) {
 server.listen(3000, function() {
   console.log('server process started!');
 });
+
+
+function onInterrupted() {
+  database.save();
+  console.log('saved database');
+  process.exit();
+}
+
+process.on('SIGINT', onInterrupted);
+process.on('uncaughtException', onInterrupted);
