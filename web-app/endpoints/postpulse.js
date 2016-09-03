@@ -1,3 +1,4 @@
+'use strict';
 let database = require('../database');
 
 module.exports = function (req, res) {

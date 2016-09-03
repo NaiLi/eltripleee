@@ -1,10 +1,11 @@
+'use strict';
 let express = require('express');
-var app = express();
+let app = express();
 let WSServer = require('ws').Server;
 let server = require('http').createServer();
 let database = require('./database');
 
-var bodyParser = require('body-parser')
+let bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true

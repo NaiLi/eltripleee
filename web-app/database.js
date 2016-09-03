@@ -1,4 +1,5 @@
-fs = require('fs');
+'use strict';
+let fs = require('fs');
 
 const filename = 'db.json'; 
 let db = {};
