@@ -1,0 +1,75 @@
+/* Color palette */
+
+:root {
+  --perrywinkle: #70b3dd;
+  --seafoam-blue: #61c5c5;
+  --french-blue: #4874ac;
+}
+
+/* Sample text styles */
+
+header {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  color: #574751;
+}
+
+#roomlist-panel {
+	width: 50%;
+	float: left;
+}
+
+#feedlist-panel {
+	width: 50%;
+	float: right;
+}
+
+#roomlist-panel h2 {
+  font-family: OpenSans;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #70b3dd;
+}
+
+#roomlist-panel p {
+  width: 37px;
+  height: 19px;
+  font-family: OpenSans;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #76623d;
+}
+
+#lista {
+	margin: 10px;
+	text-align: right;
+}
+
+.header-row {
+
+}
+
+.room-row {
+	vertical-align: center;
+}
+
+.emergency-10 {
+	background-color: #70b3dd;
+}
+
+.emergency-20 {
+	background-color: #61c5c5;
+}
+
+.emergency-30 {
+	background-color: #9b9b9b;
+}
