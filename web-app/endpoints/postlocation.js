@@ -5,18 +5,12 @@ module.exports = function (req, res) {
   let data = req.body;
   
   let id = (data.id !== undefined) ? data.id : 0;
-  let startTime = data.startTime;
-  let sampleRate = data.sampleRate;
-  let locations = [];
-
-  data.locations.forEach((locationData) => {
-    locations.push(locationData);
-  });
+  let time = data.time;
+  let location = data.location;
 
   database.insertLocationData(id, {
-    startTime: startTime,
-    sampleRate: sampleRate,
-    locations: locations
+    time: time,
+    location: location
   });
 
   res.status(200).send();

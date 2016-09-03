@@ -34,9 +34,8 @@ function postPulse() {
 
 function postLocation() {
   let postData = {
-    startTime: (new Date()).getTime() - 1000,
-    sampleRate: 1,
-    locations: [{lat: 0, long: 1, floor: 0}]
+    time: (new Date()).getTime(),
+    location: {lat: 0, long: 1, floor: 0}
   };
   post('location', postData);
 }
