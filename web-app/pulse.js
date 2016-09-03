@@ -17,6 +17,10 @@ class Pulse {
       chunkIndex = -(chunkIndex + 1) - 1;
     }
     //console.log('looking in ', chunkIndex, ', n pulse data = ', pulseData.length);
+    if (pulseData === undefined) return null;
+    if (pulseData[chunkIndex] === undefined) return null;
+
+
 
     let currentItemInChunk = pulseData[chunkIndex].beats.length - 1;
     if (pulseData[chunkIndex].beats[currentItemInChunk] < time - pulseOutdatedThreshold) return null;
