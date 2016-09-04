@@ -125,7 +125,7 @@ angular.module('eltripleee', [])
     if(accValue > 800 && !$scope.fallDetected) {
       $scope.fallDetected = true;
       roomData.data[roomData.data.length-1].movementStatus = "Fall detected";
-      $scope.createWarningToFeed(roomData, "fall", "Fall detected", 40);
+      $scope.createWarningToFeed(roomData, "fall", "Fall detected", 1);
       return;
     }
 
