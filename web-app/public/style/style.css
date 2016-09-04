@@ -124,16 +124,16 @@ html, body {
 
 .emergency-10 {
 	background-color: #70b3dd;
-  border-bottom: 1px solid #60a3cd;
+  margin-bottom: 3px;
 }
 
 .emergency-20 {
 	background-color: #61c5c5;
-  border-bottom: 1px solid #51b5b5;
+  margin-bottom: 3px;
 }
 
 .emergency-30 {
 	background-color: #9b9b9b;
-  border-bottom: 1px solid #8b8b8b;
+  margin-bottom: 3px;
 
 }

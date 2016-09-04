@@ -5,8 +5,8 @@ angular.module('eltripleee', [])
 
   $scope.title = "Postoperative department 1";
   $scope.subtitle = "University Hospital of Umeå";
-  $scope.pulseDeviation = false;
-  $scope.movementDeviation = false; 
+  $scope.pulseDeviation = false;  
+  $scope.movementDeviation = false;
   $scope.Math = window.Math;
 
   $http({
@@ -19,19 +19,18 @@ angular.module('eltripleee', [])
     console.log("error " + response.message);
   });
 
-
   $scope.feedData = {
     feed: [
     {
       roomNo: 5,
       message: "Abnormal heart rate",
       emergencyStatus: 30
-    }, 
+    },
     {
       roomNo: 17,
       message: "Low activity",
       emergencyStatus: 20
-    }, 
+    },
     {
       roomNo: 18,
       message: "Long since last check",
@@ -61,6 +60,11 @@ angular.module('eltripleee', [])
 
   $scope.onRoomClick = function(id) {
     $scope.selectedRoom = $scope.roomData[id];
+    var dataLength = $scope.selectedRoom.data.length-1;
+    var floor = $scope.selectedRoom.data[dataLength].location.floor;
+    var long = $scope.selectedRoom.data[dataLength].location.long;
+    var lat = $scope.selectedRoom.data[dataLength].location.lat;
+    $scope.$broadcast('roomSelect', floor, long, lat);
     $('#roominformationModal').modal('show');
   }
 
