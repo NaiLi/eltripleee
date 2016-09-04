@@ -47,6 +47,7 @@ class HeartBeatData:
 
     def finishMeasurement(self):
         self.endTime = int( datetime.now().strftime('%s'))*1000
+        self.time = self.endTime
 
     def toJSON(self):
         return json.dumps(self.__dict__)
@@ -58,12 +59,14 @@ class AcceleratorData:
         self.startTime = None
         self.endTime = None
         self.movement = None
+        self.time = None
 
     def startMeasurement(self):
         self.startTime = int(datetime.now().strftime('%s'))*1000
 
     def finishMeasurement(self):
         self.endTime = int( datetime.now().strftime('%s'))*1000
+        self.time = self.endTime
         self.getPeak()
         self.data = []
 
