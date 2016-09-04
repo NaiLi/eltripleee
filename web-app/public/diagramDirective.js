@@ -18,14 +18,18 @@ angular.module('eltripleee')
 
       let container = element[0].parentElement.parentElement;
 
-      canvas.width = container.clientWidth;
-      canvas.height = 100;
+      
 
 
       scope.$on('regenerateDiagrams', function(sender) {
         if (type === 'pulse') {
+          canvas.width = container.clientWidth;
+          canvas.height = 100;
           generateDiagramFromData(scope.$parent.roomData[roomId], type);
-        } 
+        } else {
+          canvas.width = container.clientWidth;
+          canvas.height = 0;
+        }
       });
 
 
