@@ -44,7 +44,7 @@ function streamDataToWebSocket(ws) {
         id: 0,
         pulse: latestPulse,
         time: (new Date()).getTime(),
-        acceleration: 1.01,
+        movement: 1.01,
         location: [1, 2, 3]
       }];
 
