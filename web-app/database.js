@@ -9,6 +9,7 @@ if (fs.existsSync(filename)) {
   db = JSON.parse(input);
 }
 
+db.nPatients = 10;
 
 class Database {
   save() {
@@ -69,6 +70,10 @@ class Database {
       return db[id].movement;
     else 
       return [];
+  }
+
+  getNPatients() {
+    return db.nPatients;
   }
 }
 
