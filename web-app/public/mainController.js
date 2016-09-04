@@ -21,16 +21,22 @@ angular.module('eltripleee', [])
   $scope.feedData = {
     feed: [
     {
-      roomNo: 5,
+      id: 0,
+      roomNo: 1,
+      type: "pulse",
       message: "Abnormal heart rate",
       emergencyStatus: 30
     },
     {
+      id: 6,
       roomNo: 7,
+      type: "movement",
       message: "Low activity",
       emergencyStatus: 20
     },
     {
+      id: 7,
+      type: "movement",
       roomNo: 8,
       message: "Long since last check",
       emergencyStatus: 10
@@ -52,6 +58,7 @@ angular.module('eltripleee', [])
       $scope.roomData[data.id].data.push(data);
       $scope.checkDeviation($scope.roomData[data.id]);
       $scope.checkMovementStatus($scope.roomData[data.id]);
+      $scope.$broadcast('regenerateDiagrams');
       $scope.$apply();
     });
   };
@@ -72,7 +79,7 @@ angular.module('eltripleee', [])
   $scope.checkDeviation = function(roomData) {
     if(!$scope.movementDeviation && $scope.checkMovementDevation(roomData)) {
       $scope.movementDeviation = true;
-      $scope.createWarningToFeed(roomData, "movement", "Moving outside of limit", 10);
+      $scope.createWarningToFeed(roomData, "location", "Moving outside of limit", 10);
     }
     else if(!$scope.pulseDeviation && $scope.checkPulseDeviation(roomData)) {
       $scope.pulseDeviation = true;
@@ -99,6 +106,8 @@ angular.module('eltripleee', [])
 
   $scope.createWarningToFeed = function(roomData, type, message, status) {
     $scope.feedData.feed.push({
+      id: roomData.id,
+      type: type,
       roomNo: roomData.roomNo,
       message: message,
       emergencyStatus: status
