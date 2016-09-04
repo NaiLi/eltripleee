@@ -6,15 +6,13 @@
   --french-blue: #4874ac;
 }
 
+.container {
+  margin-top: 50px;
+}
 
-
-header {
-  font-family: Roboto;
-  font-size: 24px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  color: #574751;
+.header {
+  
+  margin-bottom: 10px;
 }
 
 html, body {
@@ -43,9 +41,14 @@ html, body {
   margin-top: 0;
 }
 
+
+#roomlist-panel .header-row img {
+  margin-top: 6px;
+}
+
 #roomlist-panel h2 {
   font-family: OpenSans;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -80,17 +83,19 @@ html, body {
 
 #title {
   font-family: OpenSans;
-  font-size: 44px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   color: #ffffff;
 }
 #subtitle {
   font-family: OpenSans;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-align: center;
   color: #ffffff;
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 
 .lista h2 {
@@ -108,6 +113,10 @@ html, body {
   color: #ffffff;
 }
 
+.feedlista h2 {
+  font-size: 18px;
+}
+
 
 .room-row {
 	vertical-align: center;
@@ -115,12 +124,16 @@ html, body {
 
 .emergency-10 {
 	background-color: #70b3dd;
+  margin-bottom: 3px;
 }
 
 .emergency-20 {
 	background-color: #61c5c5;
+  margin-bottom: 3px;
 }
 
 .emergency-30 {
 	background-color: #9b9b9b;
+  margin-bottom: 3px;
+
 }

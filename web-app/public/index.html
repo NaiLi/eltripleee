@@ -61,10 +61,12 @@
                     <h2>Room {{room.roomNo}}</h2>
                   </div>
                   <div class="col-xs-3">
-                    <p>{{room.data[room.data.length-1].pulse != null ? room.data[room.data.length-1].pulse : 'N/A'}}</p>
+                    <p>{{room.data[room.data.length-1].pulse != null ? Math.round(room.data[room.data.length-1].pulse) : 'N/A'}}</p>
                   </div>
                   <div class="col-xs-3">
-                    <p>{{room.data[room.data.length-1].oxygenSaturation*100}} %</p>
+                    <p>{{
+                        room.data[room.data.length-1].oxygenSaturation != null ? room.data[room.data.length-1].oxygenSaturation*100 + ' %' : 'N/A'
+                      }}</p>
                   </div>
                   <div class="col-xs-3">
                     <p>{{room.data[room.data.length-1].movement}}</p>
@@ -142,7 +144,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-  <script src="data/rooms.json"></script>
   <script src="mainController.js"></script>
   <script src="mapDirective.js"></script>
   </div>
