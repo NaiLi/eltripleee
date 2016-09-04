@@ -7,6 +7,7 @@ angular.module('eltripleee', [])
   $scope.subtitle = "University Hospital of Umeå";
   $scope.pulseDeviation = false;
   $scope.movementDeviation = false; 
+  $scope.Math = window.Math;
 
   $http({
     method: 'GET',
