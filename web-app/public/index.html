@@ -66,7 +66,9 @@
                     <p>{{room.data[room.data.length-1].pulse != null ? room.data[room.data.length-1].pulse : 'N/A'}}</p>
                   </div>
                   <div class="col-xs-3">
-                    <p>{{room.data[room.data.length-1].oxygenSaturation*100}} %</p>
+                    <p>{{
+                        room.data[room.data.length-1].oxygenSaturation != null ? room.data[room.data.length-1].oxygenSaturation*100 + ' %' : 'N/A'
+                      }}</p>
                   </div>
                   <div class="col-xs-3">
                     <p>{{room.data[room.data.length-1].movement}}</p>

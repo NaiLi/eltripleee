@@ -12,7 +12,6 @@ angular.module('eltripleee', [])
     method: 'GET',
     url: '/data'
   }).then(function successCallback(response) {
-    console.log(response)
     $scope.roomData = response.data;
   }, function errorCallback(response) {
     console.log("error " + response.message);
@@ -27,12 +26,12 @@ angular.module('eltripleee', [])
       emergencyStatus: 30
     }, 
     {
-      roomNo: 17,
+      roomNo: 7,
       message: "Low activity",
       emergencyStatus: 20
     }, 
     {
-      roomNo: 18,
+      roomNo: 8,
       message: "Long since last check",
       emergencyStatus: 10
     }
@@ -44,10 +43,16 @@ angular.module('eltripleee', [])
 
   socket.onmessage = function(message) {
     //console.log('Socket server message', message);
-    var data = JSON.parse(message.data);
-    data.forEach((data) => {
+    var allData = JSON.parse(message.data);
+    allData.forEach((data) => {
+      if ($scope.roomData === undefined) {
+        return;
+      }
+
       $scope.roomData[data.id].data.push(data);
       $scope.checkDeviation($scope.roomData[data.id]);
+      $scope.checkMovementStatus($scope.roomData[data.id]);
+      $scope.$apply();
     });
   };
 
@@ -80,6 +85,10 @@ angular.module('eltripleee', [])
       return true;
     }
     return false;
+  }
+
+  $scope.checkMovementStatus = function(roomData) {
+
   }
 
   $scope.createWarningToFeed = function(roomData, type, message, status) {
