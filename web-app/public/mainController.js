@@ -61,7 +61,7 @@ angular.module('eltripleee', [])
   $scope.onRoomClick = function(id) {
     $scope.selectedRoom = $scope.roomData[id];
     var dataLength = $scope.selectedRoom.data.length-1;
-    var location = $scope.selectedRoom.data[dataLength].location.location;
+    var location = $scope.selectedRoom.data[dataLength].location;
     var floor = location.floor;
     var long = location.long;
     var lat = location.lat;
@@ -81,8 +81,20 @@ angular.module('eltripleee', [])
   }
 
   $scope.checkMovementDevation = function(roomData) {
-    return true;
-    // IF lat > ....
+
+    var centerOnStage = {longitude: 15.561740079115143, latitude: 58.39405553023432};
+    var loc = roomData.data[roomData.data.length-1].location;
+
+    var dist = geolib.getDistance(
+        centerOnStage,
+        {longitude: loc.long, latitude: loc.lat}
+      );
+    
+    if(dist > 3) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   $scope.checkPulseDeviation = function(roomData) {
@@ -95,6 +107,30 @@ angular.module('eltripleee', [])
 
   $scope.checkMovementStatus = function(roomData) {
 
+    // Check if fall
+    var accValue = roomData.data[roomData.data.length-1].movement;
+    if(accValue > 900) {
+      roomData.data[roomData.data.length-1].movementStatus = "Fall detected";
+      return;
+    }    
+
+    // Check if active movement
+    var loc1 = roomData.data[roomData.data.length-5].location;
+    var loc2 = roomData.data[roomData.data.length-1].location;
+    if(loc1.floor != loc2.floor) {
+      roomData.data[roomData.data.length-1].movementStatus = "Active";
+      return;
+    }
+    var dist = geolib.getDistance(
+      {latitude: loc1.lat, longitude: loc1.long},
+      {latitude: loc2.lat, longitude: loc2.long}
+    );
+
+    if(dist > 1) {
+      roomData.data[roomData.data.length-1].movementStatus = "Active";
+    } else {
+      roomData.data[roomData.data.length-1].movementStatus = "Still";
+    }
   }
 
   $scope.createWarningToFeed = function(roomData, type, message, status) {

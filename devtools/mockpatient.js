@@ -53,9 +53,9 @@ let currentAcceleration = 0;
 function postMovement() {
   let postData = {
     time: (new Date()).getTime(),
-    acceleration: currentAcceleration += (Math.random() * 0.01)
+    movement: currentAcceleration += (Math.random() * 100)
   };
-  post('location', postData);
+  post('movement', postData);
 }
 
 
@@ -65,5 +65,6 @@ function postMovement() {
 (function loop() {
   postPulse();
   postLocation();
+  postMovement();
   setTimeout(loop, 1000);
 })();
