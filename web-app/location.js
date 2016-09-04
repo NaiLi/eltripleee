@@ -1,7 +1,7 @@
 'use strict';
 class Location {
 	getLocationAtTime(patientId, time) {
-		return 1.0;
+		return {latitude: 1, longitude: 2, floor: 3};
 	}
 }
 

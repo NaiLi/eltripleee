@@ -5,7 +5,9 @@ let WSServer = require('ws').Server;
 let server = require('http').createServer();
 let database = require('./database');
 
-let pulse = require('./pulse')
+let pulse = require('./pulse');
+let movement = require('./movement');
+let location = require('./location');
 
 let bodyParser = require('body-parser')
 app.use(bodyParser.json());
@@ -38,15 +40,23 @@ function streamDataToWebSocket(ws) {
 
   function stream() {
     if (ws.readyState === ws.OPEN) {
-      let latestPulse = pulse.getPulseAtTime(0, (new Date()).getTime());
+      let data = [];
 
-      let data = [{
-        id: 0,
-        pulse: latestPulse,
-        time: (new Date()).getTime(),
-        movement: 1.01,
-        location: [1, 2, 3]
-      }];
+      for (let i = 0; i < database.getNPatients(); i++) {
+        let now = (new Date()).getTime();
+
+        let latestPulse = pulse.getPulseAtTime(i, now);
+        let latestMovement = movement.getMovementAtTime(i, now);
+        let latestLocation = location.getLocationAtTime(i, now);
+
+        data.push({
+          id: i,
+          pulse: latestPulse,
+          time: now,
+          movement: latestMovement,
+          location: latestLocation
+        });
+      }
 
       let json = JSON.stringify(data);
       ws.send(json);
