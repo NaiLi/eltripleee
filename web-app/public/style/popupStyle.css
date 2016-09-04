@@ -8,4 +8,51 @@
 #popup-information .row {
 	margin-top: 20px;
 	margin-right: 10px;
+	height: 100px;
+}
+
+.modal-header {
+	background-color: #4874ac;
+}
+
+#popup-information p {
+  color: #aaa;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  text-align: center;
+  margin: auto;
+}
+
+.circle-pulse {
+	border-radius: 50%;
+	width: 70px;
+	height: 70px;
+	background-color: #55c7f6;
+	vertical-align: middle;
+	line-height: 70px;
+	text-align: center;
+	color: #fff;
+}
+
+.circle-oxygen {
+	border-radius: 50%;
+	width: 70px;
+	height: 70px;
+	background-color: #34b0b6;
+	vertical-align: middle;
+	line-height: 70px;
+	text-align: center;
+	color: #fff;
+}
+
+.circle-movement {
+	border-radius: 50%;
+	width: 70px;
+	height: 70px;
+	background-color: #4874ac;
+	vertical-align: middle;
+	line-height: 70px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #fff;
 }
