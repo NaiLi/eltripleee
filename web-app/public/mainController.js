@@ -80,6 +80,7 @@ angular.module('eltripleee', [])
   }
 
   $scope.checkMovementDevation = function(roomData) {
+
     return true;
     // IF lat > ....
   }
@@ -94,6 +95,25 @@ angular.module('eltripleee', [])
 
   $scope.checkMovementStatus = function(roomData) {
 
+    //TODO check fall
+
+    // Check if active movement
+    var loc1 = roomData.data[roomData.data.length-5].location;
+    var loc2 = roomData.data[roomData.data.length-1].location;
+    if(loc1.floor != loc2.floor) {
+      roomData.data[roomData.data.length-1].movementStatus = "Active";
+      return;
+    }
+    var dist = geolib.getDistance(
+      {latitude: loc1.lat, longitude: loc1.long},
+      {latitude: loc2.lat, longitude: loc2.long}
+    );
+
+    if(dist > 1) {
+      roomData.data[roomData.data.length-1].movementStatus = "Active";
+    } else {
+      roomData.data[roomData.data.length-1].movementStatus = "Passive";
+    }
   }
 
   $scope.createWarningToFeed = function(roomData, type, message, status) {
