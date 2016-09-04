@@ -3,6 +3,7 @@ import time
 import os
 import RPi.GPIO as IO
 from datetime import datetime
+import heartAccPacket as ham
 
 DEBUG = 1
 
@@ -65,7 +66,7 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         IO.output(clockpin, True)
         IO.output(clockpin, False)
 
-    adcout = 0.0
+    adcout = 0
 
     for i in range(12):
         IO.output(clockpin, True)
@@ -81,37 +82,41 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
 
 #Heart rate sampling
 heartSample = 2
-oldhHeartSample = 1
+oldHeartSample = 1
 
 #measure heartrate during 10 seconds
-interval = 10
+heartInterval = 5
 start = datetime.now()
 current = start
 
-heartBeatCounter = 0
+dataPacket = ham.HeartAccPacket("http://10.0.0.220:3000/")
+heartBeat = ham.HeartBeatData()
+accData = ham.AcceleratorData()
 
+heartBeat.startMeasurement()
+accData.startMeasurement()
 while True:
-
     #get Accelerometer data
-    dataX = readadc(accX, SPICLK, SPIMOSI, SPIMISO, SPICS);
-    dataY = readadc(accY, SPICLK, SPIMOSI, SPIMISO, SPICS);
-    dataZ = readadc(accZ, SPICLK, SPIMOSI, SPIMISO, SPICS);
+    dataX = readadc(accX, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    dataY = readadc(accY, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    dataZ = readadc(accZ, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    accData.addAccData(dataX, dataY, dataZ)
     #print debug data
     if DEBUG:
-        print "X: ", dataX, " Y: ", dataY, " Z: ", dataZ
+        if dataX > 800 or dataY > 800 or dataZ > 800:
+            print "ERIK FALLER!!!!"
+            print "X: ", dataX, " Y: ", dataY, " Z: ", dataZ
 
 
     heartSample = IO.input(HR)
 
     if heartSample == 1 and oldHeartSample == 0:
-        heartBeatCounter += 1
         if DEBUG:
             print "Beat"
         IO.output(LED, IO.LOW)
+        heartBeat.addBeat()
 
     if heartSample == 0 and oldHeartSample == 1:
-        if DEBUG:
-            print "Beat off"
         IO.output(LED, IO.HIGH)
 
     oldHeartSample = heartSample
@@ -120,10 +125,15 @@ while True:
     measurement = current-start
 
 
-    if (measurement.seconds*1e6 + measurement.microseconds) >= interval*1e6:
+    if (measurement.seconds*1e6 + measurement.microseconds) >= heartInterval*1e6:
 
-        multiplier =  60*1e6/(measurement.seconds*1e6+measurement.microseconds)
-        print beatCounter*multiplier
+        heartBeat.finishMeasurement()
+        accData.finishMeasurement()
+        dataPacket.beats = heartBeat
+        dataPacket.accData = accData
+        dataPacket.sendPacket()
+        print "sending packet"
         start = current
-        beatCounter = 0
+        heartBeat.startMeasurement()
+        accData.startMeasurement()
 
