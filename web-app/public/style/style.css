@@ -6,9 +6,7 @@
   --french-blue: #4874ac;
 }
 
-body {
-	padding: 10px;
-}
+
 
 header {
   font-family: Roboto;
@@ -17,6 +15,10 @@ header {
   font-style: normal;
   font-stretch: normal;
   color: #574751;
+}
+
+html, body {
+  background-color: #eee;
 }
 
 /*#roomlist-panel {
@@ -28,6 +30,11 @@ header {
 	width: 50%;
 	float: right;
 }*/
+
+#roomlist-panel .row {
+  background-color: #fff;
+  margin-bottom: 10px;
+}
 
 #roomlist-panel h2 {
   font-family: OpenSans;
@@ -84,10 +91,6 @@ header {
   color: #ffffff;
 }
 
-.header-row {
-  margin: 10px 10px;
-
-}
 
 .room-row {
 	vertical-align: center;
