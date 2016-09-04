@@ -53,14 +53,6 @@ angular.module('eltripleee', [])
 
   $scope.selectedRoom;
 
-  $scope.individual = {
-    id: 0, 
-    pulse: 70, 
-    time: 1472927439053, 
-    movement: 1.01, 
-    location: [1, 2, 3]
-  }
-
   $scope.onRoomClick = function(id) {
     $scope.selectedRoom = $scope.roomData[id];
     $('#roominformationModal').modal('show');
@@ -100,4 +92,3 @@ angular.module('eltripleee', [])
   }
 
 }]);
-
