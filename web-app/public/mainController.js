@@ -17,8 +17,8 @@ angular.module('eltripleee', [])
     $scope.checkDeviation();
   };
 
-
-  $scope.title = "Avdelning XXX";
+  $scope.title = "Postoperative department 1";
+  $scope.subtitle = "University Hospital of Umeå";
 
   $scope.roomData = {
     rooms: [
@@ -32,9 +32,9 @@ angular.module('eltripleee', [])
         oxygenSaturation: 500
       },
       movement: 5,
-      emergencyStatus: 10   
+      emergencyStatus: 10
     },
-    { 
+    {
       id: 1,
       roomNo: 2,
       age: 75,
@@ -78,6 +78,7 @@ angular.module('eltripleee', [])
     acceleration: 1.01, 
     location: [1, 2, 3]
   }
+
 /*
   var source   = $("#roomlist").html();
   var template = Handlebars.compile(source);

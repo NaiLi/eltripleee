@@ -38,16 +38,37 @@ class Database {
     patientData.location.push(data); 
   }
 
-  getLatestData() {
-    // Return mock data.
-    // TODO: return real data.
-    return {
-      id: 0,
-      pulse: 70,
-      time: (new Date()).getTime(),
-      acceleration: 1.01,
-      location: [1, 2, 3]
+  insertMovementData(id, data) {
+    if (db[id] === undefined) {
+      db[id] = {};
     }
+    let patientData = db[id];
+    if (patientData.movement === undefined) {
+      patientData.movement = [];
+    }
+    patientData.movement.push(data); 
+  }
+
+  getLocationData(id) {
+    if (db[id] && db[id].location) {
+      return db[id].location;
+    } else {
+      return [];
+    }
+  }
+
+  getPulseData(id) {
+    if (db[id] && db[id].pulse)
+      return db[id].pulse;
+    else 
+      return [];
+  }
+
+  getMovementData(id) {
+    if (db[id] && db[id].movement)
+      return db[id].movement;
+    else 
+      return [];
   }
 }
 
@@ -56,19 +77,17 @@ class Database {
 /* data structure:
   id: {
     pulse: [
-      startTime:
-      endTime:
+      startTime: number,
+      endTime: number,
       beats: [time0, time1, ...]
     ],
     movement: [
-      startTime: 
-      sampleRate:
-      data: [[x, y, z], [x, y, z]]
+      time: number,
+      data: [x, y, z]
     ],
     location: [
-      startTime:
-      sampleRate
-      data [[x, y, floor], [x, y, floor], ...]
+      time: number,
+      data: {x: number, y: number, floor: number}
     ]
   }
 */

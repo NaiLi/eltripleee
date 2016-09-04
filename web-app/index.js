@@ -5,6 +5,8 @@ let WSServer = require('ws').Server;
 let server = require('http').createServer();
 let database = require('./database');
 
+let pulse = require('./pulse')
+
 let bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -13,7 +15,7 @@ app.use(bodyParser.urlencoded({
 
 
 let postPulse = require('./endpoints/postpulse');
-//let postMovement = require('./endpoints/postMovement');
+let postMovement = require('./endpoints/postmovement');
 let postLocation = require('./endpoints/postlocation');
 let getData = require('./endpoints/getdata');
 
@@ -35,7 +37,16 @@ function streamDataToWebSocket(ws) {
 
   function stream() {
     if (ws.readyState === ws.OPEN) {
-      let data = database.getLatestData();
+      let latestPulse = pulse.getPulseAtTime(0, (new Date()).getTime());
+
+      let data = [{
+        id: 0,
+        pulse: latestPulse,
+        time: (new Date()).getTime(),
+        acceleration: 1.01,
+        location: [1, 2, 3]
+      }];
+
       let json = JSON.stringify(data);
       ws.send(json);
       setTimeout(stream, 1000);
@@ -45,6 +56,7 @@ function streamDataToWebSocket(ws) {
 }
 
 wss.on('connection', function connection(ws) {
+  console.log('client connected.');
   streamDataToWebSocket(ws);
 });
 
@@ -61,4 +73,4 @@ function onInterrupted() {
 }
 
 process.on('SIGINT', onInterrupted);
-process.on('uncaughtException', onInterrupted);
+//process.on('uncaughtException', onInterrupted);
