@@ -48,13 +48,15 @@ function streamDataToWebSocket(ws) {
         let latestPulse = pulse.getPulseAtTime(i, now);
         let latestMovement = movement.getMovementAtTime(i, now);
         let latestLocation = location.getLocationAtTime(i, now);
+        let latestOxygenSaturation = oxygenSaturation.getSaturationAtTime(i, now);
 
         data.push({
           id: i,
           pulse: latestPulse,
           time: now,
           movement: latestMovement,
-          location: latestLocation
+          location: latestLocation,
+          oxygenSaturation: latestOxygenSaturation
         });
       }
 

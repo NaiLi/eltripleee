@@ -3,6 +3,7 @@
 let pulse = require('../pulse');
 let movement = require('../movement');
 let location = require('../location');
+let oxygenSaturation = require('../oxygenSaturation');
 let database = require('../database');
 
 let patients = [];
@@ -27,7 +28,7 @@ module.exports = function (req, res) {
         pulse: pulse.getPulseAtTime(patientId, t),
         movement: movement.getMovementAtTime(patientId, t),
         location: location.getLocationAtTime(patientId, t),
-        oxygenSaturation: '0.90'
+        oxygenSaturation: oxygenSaturation.getSaturationAtTime(patientId, t),
       };
       patientData.push(timeData);
     }
