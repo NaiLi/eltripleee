@@ -7,11 +7,10 @@ class Location {
     var patientlocation = database.getLocationData(patientId);
 
     if(patientlocation.length > 0) {
-      console.log("real data");
-      return patientlocation[patientlocation.length-1];
+      return patientlocation[patientlocation.length-1].location;
     }
     else {
-      return {time: time, location:{long:0, lat: 0, floor: 2}};
+      return {long:0, lat: 0, floor: 2};
     }
 	}
 }
