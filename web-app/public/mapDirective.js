@@ -2,7 +2,7 @@ angular.module('eltripleee')
 .directive('map', function() {
   return {
     restrict: 'E',
-    template: "<canvas id='mapcanvas'/>",
+    template: "<canvas id='mapcanvas' width=1100 height=777 style='width:100%'/>",
     link: function(scope, element, attrs) {
       scope.canvas = element.find('canvas')[0];
       scope.context = scope.canvas.getContext('2d');
@@ -35,15 +35,15 @@ angular.module('eltripleee')
 
         var widthRatio = imgWidth/originalWidth;
         var heightRatio = imgHeight/originalHeight;
-        var radius = imgHeight/20;
+        var radius = imgHeight/40;
 				var pixelLocation = scope.getPixelLocation(floor, longitude, latitude);
         scope.context.drawImage(img, 0, 0, imgWidth, imgHeight);
         scope.context.beginPath();
         scope.context.arc(pixelLocation.x*widthRatio, pixelLocation.y*heightRatio, radius, 0, 2 * Math.PI, false);
-        scope.context.fillStyle = 'green';
+        scope.context.fillStyle = '#4874ac';
         scope.context.fill();
         scope.context.lineWidth = 1;
-        scope.context.strokeStyle = '#003300';
+        scope.context.strokeStyle = '#4874ac';
         scope.context.stroke();
 
       })

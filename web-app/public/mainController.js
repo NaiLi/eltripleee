@@ -32,7 +32,8 @@ angular.module('eltripleee', [])
         oxygenSaturation: 500
       },
       movement: 5,
-      emergencyStatus: 10
+      emergencyStatus: 10,
+      location: [ 2, 15.561795268405373, 58.39402064631776]
     },
     {
       id: 1,
@@ -54,12 +55,12 @@ angular.module('eltripleee', [])
       roomNo: 5,
       message: "Abnormal heart rate",
       emergencyStatus: 10
-    }, 
+    },
     {
       roomNo: 17,
       message: "Low activity",
       emergencyStatus: 20
-    }, 
+    },
     {
       roomNo: 17,
       message: "Long since last check",
@@ -72,10 +73,10 @@ angular.module('eltripleee', [])
   //$('#roominformationModal').modal('show'); //TODO ta bort
 
   $scope.individual = {
-    id: 0, 
-    pulse: 70, 
-    time: 1472927439053, 
-    acceleration: 1.01, 
+    id: 0,
+    pulse: 70,
+    time: 1472927439053,
+    acceleration: 1.01,
     location: [1, 2, 3]
   }
 
@@ -94,10 +95,16 @@ angular.module('eltripleee', [])
   //$('body').append(modalTemplate(roomData.rooms[0])); //Lägg rätt person
 */
   $scope.onRoomClick = function(id) {
-        $scope.roomData.rooms[0].roomNo = 999;
-    console.log($scope.roomData.rooms[0].roomNo)
+    $scope.roomData.rooms[0].roomNo = 999;
     console.log("clicked on " + id);
     $scope.selectedRoom = $scope.roomData.rooms[id];
+
+    var floor = $scope.selectedRoom.location[0];
+    var longitude = $scope.selectedRoom.location[1];
+    var latitude = $scope.selectedRoom.location[2];
+
+    $scope.$broadcast('roomSelect', floor, longitude, latitude);
+
     //$('body').append(modalTemplate(roomData.rooms[id]));
     $('#roominformationModal').modal('show');
   }
@@ -126,4 +133,3 @@ angular.module('eltripleee', [])
   }
 
 }]);
-
