@@ -1,7 +1,7 @@
 'use strict';
 class Movement {
 	getMovementAtTime(patientId, time) {
-		return 1.0;
+		return ~~(512+Math.random()*512);
 	}
 }
 
