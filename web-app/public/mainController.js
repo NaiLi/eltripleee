@@ -61,7 +61,7 @@ angular.module('eltripleee', [])
   $scope.onRoomClick = function(id) {
     $scope.selectedRoom = $scope.roomData[id];
     var dataLength = $scope.selectedRoom.data.length-1;
-    var location = $scope.selectedRoom.data[dataLength].location.location;
+    var location = $scope.selectedRoom.data[dataLength].location;
     var floor = location.floor;
     var long = location.long;
     var lat = location.lat;
@@ -96,7 +96,12 @@ angular.module('eltripleee', [])
 
   $scope.checkMovementStatus = function(roomData) {
 
-    //TODO check fall
+    // Check if fall
+    var accValue = roomData.data[roomData.data.length-1].movement;
+    if(accValue > 900) {
+      roomData.data[roomData.data.length-1].movementStatus = "Fall detected";
+      return;
+    }    
 
     // Check if active movement
     var loc1 = roomData.data[roomData.data.length-5].location;
@@ -113,7 +118,7 @@ angular.module('eltripleee', [])
     if(dist > 1) {
       roomData.data[roomData.data.length-1].movementStatus = "Active";
     } else {
-      roomData.data[roomData.data.length-1].movementStatus = "Passive";
+      roomData.data[roomData.data.length-1].movementStatus = "Still";
     }
   }
 
