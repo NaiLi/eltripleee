@@ -82,8 +82,19 @@ angular.module('eltripleee', [])
 
   $scope.checkMovementDevation = function(roomData) {
 
-    return true;
-    // IF lat > ....
+    var centerOnStage = {longitude: 15.561740079115143, latitude: 58.39405553023432};
+    var loc = roomData.data[roomData.data.length-1].location;
+
+    var dist = geolib.getDistance(
+        centerOnStage,
+        {longitude: loc.long, latitude: loc.lat}
+      );
+    
+    if(dist > 3) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   $scope.checkPulseDeviation = function(roomData) {
