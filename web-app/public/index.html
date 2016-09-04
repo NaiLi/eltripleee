@@ -11,65 +11,102 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style/style.css">
-  <script src="https://use.fontawesome.com/4d00b53227.js"></script>
+  <script src="https://use.fontawesome.com/4d00b53227.js">
+  </script>
 </head>
 <body ng-app="eltripleee">
 
-<div ng-controller="mainController">
+  <div ng-controller="mainController">
 
-  {{title}}
-  <div class="container">
-    <div id="roomlist-panel">
-        <div class="row header-row">
 
-          <div class="col-xs-2">
-            <h2>Room</h2>
+    <div class="container">
+     <div class="row margin-row">
+       <div class="col-xs-12 header">
+        <h1 id="title">{{title}}</h1>
+        <h1 id="subtitle">{{subtitle}}</h1>
+      </div>
+    </div>
+
+    <div class="row margin-row">
+      <div class="col-xs-12">
+
+
+        <div class="row content-row">
+          <div class="col-xs-8" id="roomlist-panel">
+            <div class="row header-row">
+
+              <div class="col-xs-2">
+              </div>
+              <div class="col-xs-2">
+              <img src="/img/menu_1.png" alt="">
+                <p>Age</p>
+              </div>
+              <div class="col-xs-2">
+              <img src="/img/menu_2.png" alt="">
+                <p>Gender</p>
+              </div>
+              <div class="col-xs-2">
+              <img src="/img/menu_3.png" alt="">
+
+                <p>Pulse</p>
+              </div>
+              <div class="col-xs-2">
+              <img src="/img/menu_4.png" alt="">
+
+                <p>Oxygen saturation</p>
+              </div>
+              <div class="col-xs-2">
+              <img src="/img/menu_5.png" alt="">
+
+                <p>Movement</p>
+              </div>
+            </div>
+
+            <div class="lista">
+              <div ng-repeat="room in roomData.rooms" ng-click="onRoomClick(room.id)">
+                <!--<div class="row room-row" onClick="onRoomClick({{id}})">-->
+                <div class="row">
+                  <div class="col-xs-2">
+                    <h2>Room {{room.roomNo}}</h2>
+                  </div>
+                  <div class="col-xs-2">
+                    <p>{{room.emergencyStatus}}</p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p>{{room.medData.heartRate}}</p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p>{{room.medData.heartRate}}</p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p>{{room.medData.heartRate}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-xs-2">
-            <p>Age</p>
-          </div>
-          <div class="col-xs-2">
-            <p>Gender</p>
-          </div>
-          <div class="col-xs-2">
-            <p>Pulse</p>
-          </div>
-          <div class="col-xs-2">
-            <p>Oxygen saturation</p>
-          </div>
-          <div class="col-xs-2">
-            <p>Movement</p>
+
+
+          <div class="col-xs-4" id="feedlist-panel">
+            <div class="lista feedlista">
+              <div ng-repeat="feed in feedData.feed">
+                <div class="row room-row emergency-{{feed.emergencyStatus}}">
+                  <h2>Room {{feed.roomNo}}</h2>
+                  <p>{{feed.message}}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-      <div id="lista">
+      </div>
 
-        <div= ng-repeat="room in roomData.rooms" ng-click="onRoomClick(room.id)">
-          <!--<div class="row room-row" onClick="onRoomClick({{id}})">-->
-          <div class="row">
-            <div class="col-xs-2">
-              <h2>Room {{room.roomNo}}</h2>
-            </div>
-            <div class="col-xs-2">
-              <p>{{room.emergencyStatus}}</p>
-            </div>
-            <div class="col-xs-2">
-              <p>{{room.medData.heartRate}}</p>
-            </div>
-            <div class="col-xs-2">
-              <p>{{room.medData.heartRate}}</p>
-            </div>
-            <div class="col-xs-2">
-              <p>{{room.medData.heartRate}}</p>
-            </div>
-
-          </div>
-        </div>
 
     </div>
   </div>
 
-  <!--<script id="roominformation" type="text/x-handlebars-template">-->
+</div>
+<!--<script id="roominformation" type="text/x-handlebars-template">-->
   <!--
     <div class="modal fade" id="roominformationModal" tabindex="-1" role="dialog" aria-labelledby="roominformationLabel">
       <div class="modal-dialog" role="document">
@@ -87,35 +124,19 @@
         </div>
       </div>
     </div>-->
-  <!--</script>-->
+    <!--</script>-->
 
 
-  <!-- ************************* FEED LIST ***************************-->
-    <div id="feedlist-panel">
-
-      <div id="lista">
-
-        <div= ng-repeat="feed in feedData.feed">
-
-          <div class="row room-row emergency-{{feed.emergencyStatus}}">
-
-            <h2>Room {{feed.roomNo}}</h2>
-            <p>{{feed.message}}<p>
-
-          </div>
-        </div>
-
-      </div>
-</div>
+    <!-- ************************* FEED LIST ***************************-->
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-<script type="text/javascript" src="script/handlebars-1.0.rc.1.min.js" />
-<script src="data/rooms.json"></script>
-<script src="script.js"></script>
-<script src="mainController.js"></script>
 
-</body>
-</html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script type="text/javascript" src="script/handlebars-1.0.rc.1.min.js" />
+    <script src="data/rooms.json"></script>
+    <script src="mainController.js"></script>
+
+  </body>
+  </html>

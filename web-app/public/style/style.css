@@ -19,7 +19,7 @@ header {
   color: #574751;
 }
 
-#roomlist-panel {
+/*#roomlist-panel {
 	width: 50%;
 	float: left;
 }
@@ -27,7 +27,7 @@ header {
 #feedlist-panel {
 	width: 50%;
 	float: right;
-}
+}*/
 
 #roomlist-panel h2 {
   font-family: OpenSans;
@@ -51,12 +51,41 @@ header {
   color: #76623d;
 }
 
-#lista {
-	margin: 10px;
-	text-align: right;
+.header
+{
+  height: 25%;
+  background-color: #4874ac;
+
+}
+
+#title {
+  font-family: OpenSans;
+  font-size: 44px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+}
+#subtitle {
+  font-family: OpenSans;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+}
+
+.lista h2 {
+  font-family: OpenSans;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.feedlista h2, p {
+  margin: 10px;
+  color: #ffffff;
 }
 
 .header-row {
+  margin: 10px 10px;
 
 }
 
