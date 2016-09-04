@@ -1,3 +1,4 @@
+'use strict';
 let database = require('./database');
 let binarySearch = require('binary-search');
 
@@ -47,7 +48,7 @@ class Pulse {
         }
         currentItemInChunk = pulseData[chunkIndex].beats.length - 1;
       }
-      
+
     }
 
     if (nSamples < minSamples) {

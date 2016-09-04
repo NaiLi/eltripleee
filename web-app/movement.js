@@ -1,3 +1,5 @@
+'use strict';
+
 class Movement {
 	getMovementAtTime(patientId, time) {
 		return 1.0;
