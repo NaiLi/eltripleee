@@ -48,7 +48,7 @@ class Pulse {
         }
         currentItemInChunk = pulseData[chunkIndex].beats.length - 1;
       }
-      
+
     }
 
     if (nSamples < minSamples) {

@@ -24,6 +24,7 @@ app.use(express.static('public'));
 app.get('/data', getData);
 app.post('/pulse', postPulse);
 app.post('/location', postLocation);
+app.post('/movement', postMovement);
 
 // Create web socket server on top of a regular http server
 let wss = new WSServer({
