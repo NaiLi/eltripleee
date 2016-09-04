@@ -1,3 +1,5 @@
+'use strict';
+
 class Location {
 	getLocationAtTime(patientId, time) {
 		return 1.0;
