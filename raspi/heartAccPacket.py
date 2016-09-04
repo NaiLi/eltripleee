@@ -13,13 +13,19 @@ class HeartAccPacket:
         req.add_header('Content-Type', 'application/json')
         payload = self.beats.toJSON()
         print payload
-        urllib2.urlopen(req, (payload))
+        try:
+            urllib2.urlopen(req, (payload))
+        except:
+            print 'error'
 
-       # req = urllib2.Request(self.endPoint+"acc")
-       # req.add_header('Content-Type', 'application/json')
-       # payload = self.beats.toJSON()
-       # print payload
-       # urllib2.urlopen(req, (payload))
+        req = urllib2.Request(self.endPoint+"movement")
+        req.add_header('Content-Type', 'application/json')
+        payload = self.accData.toJSON()
+        print payload
+        try:
+            urllib2.urlopen(req, (payload))
+        except:
+            print 'error'
 
         self.clear()
 
@@ -34,13 +40,13 @@ class HeartBeatData:
         self.beats = []
 
     def addBeat(self):
-        self.beats.append(int(datetime.now().strftime('%s')))
+        self.beats.append(int(datetime.now().strftime('%s'))*1000)
 
     def startMeasurement(self):
-        self.startTime = int(datetime.now().strftime('%s'))
+        self.startTime = int(datetime.now().strftime('%s'))*1000
 
     def finishMeasurement(self):
-        self.endTime = int( datetime.now().strftime('%s'))
+        self.endTime = int( datetime.now().strftime('%s'))*1000
 
     def toJSON(self):
         return json.dumps(self.__dict__)
@@ -51,14 +57,15 @@ class AcceleratorData:
         self.data = []
         self.startTime = None
         self.endTime = None
-        self.peak = None
+        self.movement = None
 
     def startMeasurement(self):
-        self.startTime = int(datetime.now().strftime('%s'))
+        self.startTime = int(datetime.now().strftime('%s'))*1000
 
     def finishMeasurement(self):
-        self.endTime = int( datetime.now().strftime('%s'))
+        self.endTime = int( datetime.now().strftime('%s'))*1000
         self.getPeak()
+        self.data = []
 
     def addAccData(self, x, y, z):
         self.data.append(x)
@@ -66,7 +73,13 @@ class AcceleratorData:
         self.data.append(z)
 
     def getPeak(self):
-        self.peak = max(self.data)
+        if len(self.data) > 0:
+            largest = max(self.data)
+            smallest = 1024-min(self.data)
+            self.movement = max(largest, smallest)
+        else:
+            self.movement = 512
+
 
     def toJSON(self):
         return json.dumps(self.__dict__)
