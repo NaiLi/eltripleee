@@ -3,7 +3,7 @@
 let pulse = require('../pulse');
 let movement = require('../movement');
 let location = require('../location');
-let oxygenSaturation = require('../oxygenSaturation');
+let oxygenSaturation = require('../oxygensaturation');
 let database = require('../database');
 
 let patients = [];
