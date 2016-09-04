@@ -7,6 +7,8 @@ angular.module('eltripleee', [])
   $scope.subtitle = "University Hospital of Umeå";
   $scope.pulseDeviation = false;  
   $scope.movementDeviation = false;
+  $scope.fallDetected = false;
+
   $scope.Math = window.Math;
 
   $http({
@@ -104,6 +106,10 @@ angular.module('eltripleee', [])
     }
   }
 
+  $scope.checkFall = function(roomData) {
+    var acc = roomData.data[roomData.data.length-1].location;
+  }
+
   $scope.checkPulseDeviation = function(roomData) {
     // Gör en grej!
     if($scope.roomData[0].datapulse > 90) {
@@ -117,7 +123,9 @@ angular.module('eltripleee', [])
     // Check if fall
     var accValue = roomData.data[roomData.data.length-1].movement;
     if(accValue > 900) {
+      $scope.fallDetected = true;
       roomData.data[roomData.data.length-1].movementStatus = "Fall detected";
+      $scope.createWarningToFeed(roomData, "fall", "Fall detected", 10);
       return;
     }    
 
