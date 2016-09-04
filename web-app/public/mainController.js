@@ -44,10 +44,15 @@ angular.module('eltripleee', [])
 
   socket.onmessage = function(message) {
     //console.log('Socket server message', message);
-    var data = JSON.parse(message.data);
-    data.forEach((data) => {
-      $scope.roomData[data.id].data.push(data.data);
+    var allData = JSON.parse(message.data);
+    allData.forEach((data) => {
+      if ($scope.roomData === undefined) {
+        return;
+      }
+
+      $scope.roomData[data.id].data.push(data);
       $scope.checkDeviation();
+      $scope.$apply();
     });
   };
 
