@@ -46,8 +46,8 @@ angular.module('eltripleee', [])
     //console.log('Socket server message', message);
     var data = JSON.parse(message.data);
     data.forEach((data) => {
-      $scope.roomData[data.id].data.push(data.data);
-      $scope.checkDeviation();
+      $scope.roomData[data.id].data.push(data);
+      $scope.checkDeviation($scope.roomData[data.id]);
     });
   };
 
@@ -58,23 +58,23 @@ angular.module('eltripleee', [])
     $('#roominformationModal').modal('show');
   }
 
-  $scope.checkDeviation = function() {
-    if(!$scope.movementDeviation && $scope.checkMovementDevation()) {
+  $scope.checkDeviation = function(roomData) {
+    if(!$scope.movementDeviation && $scope.checkMovementDevation(roomData)) {
       $scope.movementDeviation = true;
-      $scope.createWarningToFeed("pulse", "Moving outside of limit", 10);
+      $scope.createWarningToFeed(roomData, "movement", "Moving outside of limit", 10);
     }
-    else if(!$scope.pulseDeviation && $scope.checkPulseDeviation()) {
+    else if(!$scope.pulseDeviation && $scope.checkPulseDeviation(roomData)) {
       $scope.pulseDeviation = true;
-      $scope.createWarningToFeed("pulse", "High pulse", 20);
+      $scope.createWarningToFeed(roomData, "pulse", "High pulse", 20);
     }
   }
 
-  $scope.checkMovementDevation = function() {
+  $scope.checkMovementDevation = function(roomData) {
     return true;
     // IF lat > ....
   }
 
-  $scope.checkPulseDeviation = function() {
+  $scope.checkPulseDeviation = function(roomData) {
     // Gör en grej!
     if($scope.roomData[0].datapulse > 90) {
       return true;
@@ -82,9 +82,9 @@ angular.module('eltripleee', [])
     return false;
   }
 
-  $scope.createWarningToFeed = function(type, message, status) {
+  $scope.createWarningToFeed = function(roomData, type, message, status) {
     $scope.feedData.feed.push({
-      roomNo: 201,
+      roomNo: roomData.roomNo,
       message: message,
       emergencyStatus: status
     })
