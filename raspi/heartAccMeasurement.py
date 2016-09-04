@@ -85,7 +85,7 @@ heartSample = 2
 oldHeartSample = 1
 
 #measure heartrate during 10 seconds
-heartInterval = 5
+heartInterval = 3
 start = datetime.now()
 current = start
 
