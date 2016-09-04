@@ -1,7 +1,7 @@
 'use strict';
 let fs = require('fs');
 
-const filename = 'db.json'; 
+const filename = 'db.json';
 let db = {};
 
 if (fs.existsSync(filename)) {
@@ -36,7 +36,7 @@ class Database {
     if (patientData.location === undefined) {
       patientData.location = [];
     }
-    patientData.location.push(data); 
+    patientData.location.push(data);
   }
 
   insertMovementData(id, data) {
@@ -47,7 +47,7 @@ class Database {
     if (patientData.movement === undefined) {
       patientData.movement = [];
     }
-    patientData.movement.push(data); 
+    patientData.movement.push(data);
   }
 
   getLocationData(id) {
@@ -61,14 +61,14 @@ class Database {
   getPulseData(id) {
     if (db[id] && db[id].pulse)
       return db[id].pulse;
-    else 
+    else
       return [];
   }
 
   getMovementData(id) {
     if (db[id] && db[id].movement)
       return db[id].movement;
-    else 
+    else
       return [];
   }
 
