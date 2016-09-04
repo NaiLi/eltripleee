@@ -1,10 +1,41 @@
 let socket = new WebSocket('ws://localhost:3000/');
 
 angular.module('eltripleee', [])
-  .controller('mainController', ['$scope', function($scope) {
+  .controller('mainController', ['$scope', '$http', function($scope, $http) {
 
-  $scope.data; // data från armbandet
-  var pulseHistoryArray = [];
+  $scope.title = "Postoperative department 1";
+  $scope.subtitle = "University Hospital of Umeå";
+  $scope.pulseDeviation = false;  
+  $scope.movementDeviation = false;
+  $scope.Math = window.Math;
+
+  $http({
+    method: 'GET',
+    url: '/data'
+  }).then(function successCallback(response) {
+    $scope.roomData = response.data;
+  }, function errorCallback(response) {
+    console.log("error " + response.message);
+  });
+
+  $scope.feedData = {
+    feed: [
+    {
+      roomNo: 5,
+      message: "Abnormal heart rate",
+      emergencyStatus: 30
+    },
+    {
+      roomNo: 7,
+      message: "Low activity",
+      emergencyStatus: 20
+    },
+    {
+      roomNo: 8,
+      message: "Long since last check",
+      emergencyStatus: 10
+    }
+  ]};
 
   socket.onopen = function() {
     console.log('Socket open.');
@@ -12,118 +43,67 @@ angular.module('eltripleee', [])
 
   socket.onmessage = function(message) {
     //console.log('Socket server message', message);
-    $scope.data = JSON.parse(message.data);
-    pulseHistoryArray.push($scope.data.pulse);
-    $scope.checkDeviation();
+    var allData = JSON.parse(message.data);
+    allData.forEach((data) => {
+      if ($scope.roomData === undefined) {
+        return;
+      }
+
+      $scope.roomData[data.id].data.push(data);
+      $scope.checkDeviation($scope.roomData[data.id]);
+      $scope.checkMovementStatus($scope.roomData[data.id]);
+      $scope.$apply();
+    });
   };
 
-  $scope.title = "Postoperative department 1";
-  $scope.subtitle = "University Hospital of Umeå";
-
-  $scope.roomData = {
-    rooms: [
-    {
-      id: 0,
-      roomNo: 1,
-      age: 65,
-      gender: "f",
-      medData: {
-        heartRate: 67,
-        oxygenSaturation: 500
-      },
-      movement: 5,
-      emergencyStatus: 10
-    },
-    {
-      id: 1,
-      roomNo: 2,
-      age: 75,
-      gender: "m",
-      medData: {
-        heartRate: 103,
-        oxygenSaturation: 500
-      },
-      movement: 2,
-      emergencyStatus: 20
-    }
-  ]};
-
-  $scope.feedData = {
-    feed: [
-    {
-      roomNo: 5,
-      message: "Abnormal heart rate",
-      emergencyStatus: 10
-    }, 
-    {
-      roomNo: 17,
-      message: "Low activity",
-      emergencyStatus: 20
-    }, 
-    {
-      roomNo: 17,
-      message: "Long since last check",
-      emergencyStatus: 30
-    }
-  ]};
-
   $scope.selectedRoom;
- // $scope.selectedRoom = $scope.roomData.rooms[0]; //TODO ta bort
-  //$('#roominformationModal').modal('show'); //TODO ta bort
 
-  $scope.individual = {
-    id: 0, 
-    pulse: 70, 
-    time: 1472927439053, 
-    acceleration: 1.01, 
-    location: [1, 2, 3]
-  }
-
-/*
-  var source   = $("#roomlist").html();
-  var template = Handlebars.compile(source);
-  $('body').append(template(roomData));
-
-  var source   = $("#feedlist").html();
-  var template = Handlebars.compile(source);
-  $('body').append(template(feedData));
-
-
-  var source   = $("#roominformation").html();
-  var modalTemplate = Handlebars.compile(source);
-  //$('body').append(modalTemplate(roomData.rooms[0])); //Lägg rätt person
-*/
   $scope.onRoomClick = function(id) {
-        $scope.roomData.rooms[0].roomNo = 999;
-    console.log($scope.roomData.rooms[0].roomNo)
-    console.log("clicked on " + id);
-    $scope.selectedRoom = $scope.roomData.rooms[id];
-    //$('body').append(modalTemplate(roomData.rooms[id]));
+    $scope.selectedRoom = $scope.roomData[id];
+    var dataLength = $scope.selectedRoom.data.length-1;
+    var location = $scope.selectedRoom.data[dataLength].location.location;
+    var floor = location.floor;
+    var long = location.long;
+    var lat = location.lat;
+    $scope.$broadcast('roomSelect', floor, long, lat);
     $('#roominformationModal').modal('show');
   }
 
-  $scope.checkDeviation = function() {
-    if($scope.checkPulseDeviation()) {
-      $scope.createWarningToFeed("pulse", "High pulse", 10);
+  $scope.checkDeviation = function(roomData) {
+    if(!$scope.movementDeviation && $scope.checkMovementDevation(roomData)) {
+      $scope.movementDeviation = true;
+      $scope.createWarningToFeed(roomData, "movement", "Moving outside of limit", 10);
+    }
+    else if(!$scope.pulseDeviation && $scope.checkPulseDeviation(roomData)) {
+      $scope.pulseDeviation = true;
+      $scope.createWarningToFeed(roomData, "pulse", "High pulse", 20);
     }
   }
 
-  $scope.checkPulseDeviation = function() {
+  $scope.checkMovementDevation = function(roomData) {
+    return true;
+    // IF lat > ....
+  }
+
+  $scope.checkPulseDeviation = function(roomData) {
     // Gör en grej!
-    if($scope.data.pulse > 3) {
+    if($scope.roomData[0].datapulse > 90) {
       return true;
     }
     return false;
   }
 
-  $scope.createWarningToFeed = function(type, message, status) {
+  $scope.checkMovementStatus = function(roomData) {
+
+  }
+
+  $scope.createWarningToFeed = function(roomData, type, message, status) {
     $scope.feedData.feed.push({
-      roomNo: 201,
+      roomNo: roomData.roomNo,
       message: message,
       emergencyStatus: status
     })
-    $scope.feedData.feed[0].roomNo = 9;
+    $scope.$apply();
   }
 
 }]);
-

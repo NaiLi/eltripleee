@@ -6,15 +6,13 @@
   --french-blue: #4874ac;
 }
 
+.container {
+  margin-top: 50px;
+}
 
-
-header {
-  font-family: Roboto;
-  font-size: 24px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  color: #574751;
+.header {
+  
+  margin-bottom: 10px;
 }
 
 html, body {
@@ -33,12 +31,24 @@ html, body {
 
 #roomlist-panel .row {
   background-color: #fff;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+#roomlist-panel .header-row p {
+  color: #aaa;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  margin-top: 0;
+}
+
+
+#roomlist-panel .header-row img {
+  margin-top: 6px;
 }
 
 #roomlist-panel h2 {
   font-family: OpenSans;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -46,16 +56,22 @@ html, body {
   color: #70b3dd;
 }
 
+
+#roomlist-panel .row div {
+  text-align: center;
+}
+
 #roomlist-panel p {
-  width: 37px;
-  height: 19px;
   font-family: OpenSans;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  text-align: center;
   color: #76623d;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
 
 .header
@@ -67,17 +83,19 @@ html, body {
 
 #title {
   font-family: OpenSans;
-  font-size: 44px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   color: #ffffff;
 }
 #subtitle {
   font-family: OpenSans;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-align: center;
   color: #ffffff;
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 
 .lista h2 {
@@ -86,9 +104,17 @@ html, body {
   font-weight: bold;
 }
 
+.feedlista .row {
+  margin-left: -5px;
+}
+
 .feedlista h2, p {
   margin: 10px;
   color: #ffffff;
+}
+
+.feedlista h2 {
+  font-size: 18px;
 }
 
 
@@ -98,12 +124,16 @@ html, body {
 
 .emergency-10 {
 	background-color: #70b3dd;
+  margin-bottom: 3px;
 }
 
 .emergency-20 {
 	background-color: #61c5c5;
+  margin-bottom: 3px;
 }
 
 .emergency-30 {
 	background-color: #9b9b9b;
+  margin-bottom: 3px;
+
 }
