@@ -33,7 +33,7 @@ html, body {
 
 #roomlist-panel .row {
   background-color: #fff;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #f8f8f8;
 }
 
 #roomlist-panel h2 {
@@ -84,6 +84,10 @@ html, body {
   font-family: OpenSans;
   font-size: 24px;
   font-weight: bold;
+}
+
+.feedlista .row {
+  margin-left: -5px;
 }
 
 .feedlista h2, p {

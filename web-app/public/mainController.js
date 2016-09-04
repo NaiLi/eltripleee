@@ -67,6 +67,7 @@ angular.module('eltripleee', [])
     }
   ]};
 
+
   $scope.selectedRoom;
  // $scope.selectedRoom = $scope.roomData.rooms[0]; //TODO ta bort
   //$('#roominformationModal').modal('show'); //TODO ta bort
