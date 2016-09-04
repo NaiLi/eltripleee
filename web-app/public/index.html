@@ -99,23 +99,7 @@
             </div>
           </div>
         </div>
-
       </div>
-
-
-    </div>
-  </div>
-
-  <!-- ************************* FEED LIST ***************************-->
-  <div id="feedlist-panel">
-    <div id="lista">
-      <div= ng-repeat="feedObj in feedData.feed | orderBy: 'feedObjv.emergencyStatus'">
-        <div class="row room-row emergency-{{feedObj.emergencyStatus}}">
-
-          <h2>Room {{feedObj.roomNo}}</h2>
-          <p>{{feedObj.message}}<p>
-
-        </div>
     </div>
   </div>
 

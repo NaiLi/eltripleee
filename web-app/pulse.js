@@ -1,3 +1,4 @@
+'use strict';
 let database = require('./database');
 let binarySearch = require('binary-search');
 
