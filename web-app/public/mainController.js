@@ -61,9 +61,9 @@ angular.module('eltripleee', [])
     $scope.selectedRoom = $scope.roomData[id];
     var dataLength = $scope.selectedRoom.data.length-1;
     var floor = $scope.selectedRoom.data[dataLength].location.floor;
-    var longitude = $scope.selectedRoom[dataLength].location.longitude;
-    var latitude = $scope.selectedRoom[dataLength].location.latitude;
-    $scope.$broadcast('roomSelect', floor, longitude, latitude);
+    var long = $scope.selectedRoom.data[dataLength].location.long;
+    var lat = $scope.selectedRoom.data[dataLength].location.lat;
+    $scope.$broadcast('roomSelect', floor, long, lat);
     $('#roominformationModal').modal('show');
   }
 
