@@ -29,3 +29,8 @@ class Database {
 }
 
 module.exports = new Database();
+
+
+// Average position on stage:
+// 15.561740079115143
+// 58.39405553023432
