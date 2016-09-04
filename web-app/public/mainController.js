@@ -5,7 +5,7 @@ angular.module('eltripleee', [])
 
   $scope.title = "Postoperative department 1";
   $scope.subtitle = "University Hospital of Umeå";
-  $scope.pulseDeviation = false;  
+  $scope.pulseDeviation = false;
   $scope.movementDeviation = false;
   $scope.fallDetected = false;
 
@@ -98,7 +98,7 @@ angular.module('eltripleee', [])
         centerOnStage,
         {longitude: loc.long, latitude: loc.lat}
       );
-    
+
     if(dist > 3) {
       return true;
     } else {
@@ -122,12 +122,12 @@ angular.module('eltripleee', [])
 
     // Check if fall
     var accValue = roomData.data[roomData.data.length-1].movement;
-    if(accValue > 900) {
+    if(accValue > 800 && !$scope.fallDetected) {
       $scope.fallDetected = true;
       roomData.data[roomData.data.length-1].movementStatus = "Fall detected";
-      $scope.createWarningToFeed(roomData, "fall", "Fall detected", 10);
+      $scope.createWarningToFeed(roomData, "fall", "Fall detected", 40);
       return;
-    }    
+    }
 
     // Check if active movement
     var loc1 = roomData.data[roomData.data.length-5].location;
@@ -149,7 +149,7 @@ angular.module('eltripleee', [])
   }
 
   $scope.createWarningToFeed = function(roomData, type, message, status) {
-    $scope.feedData.feed.push({
+    $scope.feedData.feed.unshift({
       id: roomData.id,
       type: type,
       roomNo: roomData.roomNo,
