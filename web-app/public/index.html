@@ -87,13 +87,14 @@
             </div>
           </div>
 
+          <!-- *** FEED *** -->
 
           <div class="col-xs-4" id="feedlist-panel">
             <div class="lista feedlista">
-              <div ng-repeat="feed in feedData.feed">
-                <div class="row room-row emergency-{{feed.emergencyStatus}}">
-                  <h2>Room {{feed.roomNo}}</h2>
-                  <p>{{feed.message}}</p>
+              <div ng-repeat="feedObject in feedData.feed | orderBy:'emergencyStatus'">
+                <div class="row room-row emergency-{{feedObject.emergencyStatus}}">
+                  <h2>Room {{feedObject.roomNo}}</h2>
+                  <p>{{feedObject.message}}</p>
                 </div>
               </div>
             </div>
