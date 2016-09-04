@@ -73,7 +73,7 @@ angular.module('eltripleee')
 
         let x = 0;
         let y = 0;
-        console.log(n - 60);
+
         for (let i = n - 60; i < n; i++) {
           
           y = h;
