@@ -6,23 +6,15 @@ let location = require('../location');
 const patients = [
   {
     roomNo: 1,
-    age: 42,
-    gender: 'm'
   },
   {
     roomNo: 2,
-    age: 63,
-    gender: 'f'
   },
   {
     roomNo: 3,
-    age: 81,
-    gender: 'f'
   },
   {
     roomNo: 4,
-    age: 76,
-    gender: 'm'
   },
 ];
 
@@ -40,14 +32,14 @@ module.exports = function (req, res) {
         time: t,
         pulse: pulse.getPulseAtTime(patientId, t),
         movement: movement.getMovementAtTime(patientId, t),
-        location: location.getLocationAtTime(patientId, t)
+        location: location.getLocationAtTime(patientId, t),
+        oxygenSaturation: '0.90'
       };
       patientData.push(timeData);
     }
     data[patientId] = {
+      id: patientId,
       roomNo: patients[patientId].roomNo,
-      gender: patients[patientId].gender,
-      age: patients[patientId].age,
       data: patientData
     }
   });

@@ -46,6 +46,11 @@ html, body {
   color: #70b3dd;
 }
 
+
+#roomlist-panel .row div {
+  text-align: center;
+}
+
 #roomlist-panel p {
   width: 37px;
   height: 19px;
@@ -54,8 +59,11 @@ html, body {
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  text-align: center;
   color: #76623d;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
 
 .header
